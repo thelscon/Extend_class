@@ -59,18 +59,10 @@ enum ECoursesLevel {
     ADVANCED = 'ADVANCED'
 }
 
-type AddRemoveValueType <Type , SubType> = Type extends Group ? Student : 
-                                Type extends Level ? Group :
-                                Type extends Area ? Level : 
-                                Type extends School ? (SubType extends Area ? Area : Lecturer) 
-                                : never 
-
-function addToArray <Type , SubType> (AddValue : AddRemoveValueType <Type , SubType> , 
-                                        ArrayValues : Array <AddRemoveValueType <Type , SubType>>) : void {
+function addToArray <Type> (AddValue : Type , ArrayValues : Array <Type>) : void {
     ArrayValues.push (AddValue)
 }
-function removeInArray <Type , SubType> (RemoveValue : AddRemoveValueType <Type , SubType> , 
-                                            ArrayValues : Array <AddRemoveValueType <Type , SubType>>) : boolean {
+function removeInArray <Type> (RemoveValue : Type , ArrayValues : Array <Type>) : boolean {
     const indexDelete : number = ArrayValues.indexOf (RemoveValue)
     if (indexDelete >= 0) {
         ArrayValues.splice (indexDelete , 1)
@@ -136,16 +128,16 @@ class School {
     }
 
     addArea (area : Area) : void {
-        addToArray <School , Area> (area , this._areas)
+        addToArray (area , this._areas)
     }
     removeArea (area : Area) : boolean {
-        return removeInArray <School , Area> (area , this._areas)
+        return removeInArray (area , this._areas)
     }
     addLecturer (lecturer : Lecturer) : void {
-        addToArray <School , Lecturer> (lecturer , this._lecturers )
+        addToArray (lecturer , this._lecturers )
     }
     removeLecturer (lecturer : Lecturer) : boolean {
-        return removeInArray <School , Lecturer> (lecturer , this._lecturers )
+        return removeInArray (lecturer , this._lecturers )
     }
 }
 
@@ -162,10 +154,10 @@ class Area {
     constructor ( private _name : EAreas) {}
 
     addLevel (level : Level) : void {
-        addToArray <Area , never> (level , this._levels)
+        addToArray (level , this._levels)
     }
     removeLevel (level : Level) : boolean {
-        return removeInArray <Area , never> (level , this._levels)
+        return removeInArray (level , this._levels)
     }
 }
 
@@ -182,16 +174,16 @@ class Level {
     ) {}
 
     addGroup (group : Group) : void {
-        addToArray <Level , never> (group , this._groups)
+        addToArray (group , this._groups)
     }
     removeGroup (group : Group) : boolean {
-        return removeInArray <Level , never> (group , this._groups)
+        return removeInArray (group , this._groups)
     }
 }
 
 type predicateSortType <Type> = (a : Type , b : Type) => number
 class ArrayWithToSorted <Type> extends Array <Type> {
-    toSorted : (predicate ?: predicateSortType <Type>) => ArrayWithToSorted <Type>
+    toSorted : ((predicate ?: predicateSortType <Type>) => ArrayWithToSorted <Type>)
 
     constructor (value ?: number | Array <Type>) {
         if (value) {
@@ -251,10 +243,10 @@ class Group {
     }
 
     addStudent (student : Student) : void {
-        addToArray <Group , never> (student , this._students)
+        addToArray (student , this._students)
     }
     removeStudent (student : Student) : boolean {
-        return removeInArray <Group , never> (student , this._students)
+        return removeInArray (student , this._students)
     }
 
     showPerformance () : ArrayWithToSorted <Student> {

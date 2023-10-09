@@ -1,18 +1,4 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+"use strict";
 var EAreas;
 (function (EAreas) {
     EAreas["Programming"] = "Programming";
@@ -79,7 +65,7 @@ function addToArray(AddValue, ArrayValues) {
     ArrayValues.push(AddValue);
 }
 function removeInArray(RemoveValue, ArrayValues) {
-    var indexDelete = ArrayValues.indexOf(RemoveValue);
+    const indexDelete = ArrayValues.indexOf(RemoveValue);
     if (indexDelete >= 0) {
         ArrayValues.splice(indexDelete, 1);
         return true;
@@ -94,8 +80,36 @@ var PositionLecturerEnum;
     PositionLecturerEnum["Senior"] = "Senior";
     PositionLecturerEnum["Lead"] = "Lead";
 })(PositionLecturerEnum || (PositionLecturerEnum = {}));
-var Lecturer = /** @class */ (function () {
-    function Lecturer(_name, _surname, _position, _company, _experience, _courses, _contact) {
+class Lecturer {
+    _name;
+    _surname;
+    _position;
+    _company;
+    _experience;
+    _courses;
+    _contact;
+    get name() {
+        return this._name;
+    }
+    get surname() {
+        return this._surname;
+    }
+    get position() {
+        return this._position;
+    }
+    get company() {
+        return this._company;
+    }
+    get experience() {
+        return this._experience;
+    }
+    get courses() {
+        return this._courses;
+    }
+    get contact() {
+        return this._contact;
+    }
+    constructor(_name, _surname, _position, _company, _experience, _courses, _contact) {
         this._name = _name;
         this._surname = _surname;
         this._position = _position;
@@ -104,282 +118,174 @@ var Lecturer = /** @class */ (function () {
         this._courses = _courses;
         this._contact = _contact;
     }
-    Object.defineProperty(Lecturer.prototype, "name", {
-        get: function () {
-            return this._name;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Lecturer.prototype, "surname", {
-        get: function () {
-            return this._surname;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Lecturer.prototype, "position", {
-        get: function () {
-            return this._position;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Lecturer.prototype, "company", {
-        get: function () {
-            return this._company;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Lecturer.prototype, "experience", {
-        get: function () {
-            return this._experience;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Lecturer.prototype, "courses", {
-        get: function () {
-            return this._courses;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Lecturer.prototype, "contact", {
-        get: function () {
-            return this._contact;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return Lecturer;
-}());
-var School = /** @class */ (function () {
-    function School() {
-        this._areas = [];
-        this._lecturers = [];
+}
+class School {
+    _areas = [];
+    _lecturers = [];
+    get areas() {
+        return this._areas;
     }
-    Object.defineProperty(School.prototype, "areas", {
-        get: function () {
-            return this._areas;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(School.prototype, "lecturer", {
-        get: function () {
-            return this._lecturers;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    School.prototype.addArea = function (area) {
+    get lecturer() {
+        return this._lecturers;
+    }
+    addArea(area) {
         addToArray(area, this._areas);
-    };
-    School.prototype.removeArea = function (area) {
-        return removeInArray(area, this._areas);
-    };
-    School.prototype.addLecturer = function (lecturer) {
-        addToArray(lecturer, this._lecturers);
-    };
-    School.prototype.removeLecturer = function (lecturer) {
-        return removeInArray(lecturer, this._lecturers);
-    };
-    return School;
-}());
-var Area = /** @class */ (function () {
-    function Area(_name) {
-        this._name = _name;
-        this._levels = [];
     }
-    Object.defineProperty(Area.prototype, "name", {
-        get: function () {
-            return this._name;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Area.prototype, "levels", {
-        get: function () {
-            return this._levels;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Area.prototype.addLevel = function (level) {
+    removeArea(area) {
+        return removeInArray(area, this._areas);
+    }
+    addLecturer(lecturer) {
+        addToArray(lecturer, this._lecturers);
+    }
+    removeLecturer(lecturer) {
+        return removeInArray(lecturer, this._lecturers);
+    }
+}
+class Area {
+    _name;
+    _levels = [];
+    get name() {
+        return this._name;
+    }
+    get levels() {
+        return this._levels;
+    }
+    constructor(_name) {
+        this._name = _name;
+    }
+    addLevel(level) {
         addToArray(level, this._levels);
-    };
-    Area.prototype.removeLevel = function (level) {
+    }
+    removeLevel(level) {
         return removeInArray(level, this._levels);
-    };
-    return Area;
-}());
-var Level = /** @class */ (function () {
-    function Level(_name, _description) {
+    }
+}
+class Level {
+    _name;
+    _description;
+    _groups = [];
+    get groups() {
+        return this._groups;
+    }
+    constructor(_name, _description) {
         this._name = _name;
         this._description = _description;
-        this._groups = [];
     }
-    Object.defineProperty(Level.prototype, "groups", {
-        get: function () {
-            return this._groups;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Level.prototype.addGroup = function (group) {
+    addGroup(group) {
         addToArray(group, this._groups);
-    };
-    Level.prototype.removeGroup = function (group) {
+    }
+    removeGroup(group) {
         return removeInArray(group, this._groups);
-    };
-    return Level;
-}());
-var ArrayWithToSorted = /** @class */ (function (_super) {
-    __extends(ArrayWithToSorted, _super);
-    function ArrayWithToSorted(value) {
-        var _this = this;
+    }
+}
+class ArrayWithToSorted extends Array {
+    toSorted;
+    constructor(value) {
         if (value) {
             if (typeof value === 'number')
-                _this = _super.call(this, value) || this;
+                super(value);
             else
-                _this = _super.apply(this, value) || this;
+                super(...value);
         }
         else {
-            _this = _super.call(this) || this;
+            super();
         }
-        Object.defineProperty(_this, 'toSorted', {
+        Object.defineProperty(this, 'toSorted', {
             writable: true,
             enumerable: false
         });
-        _this.toSorted = function (predicate) {
-            var returnArray = new ArrayWithToSorted;
-            returnArray.push.apply(returnArray, _this);
+        this.toSorted = (predicate) => {
+            const returnArray = new ArrayWithToSorted;
+            returnArray.push(...this);
             return returnArray.sort(predicate);
         };
-        return _this;
     }
-    return ArrayWithToSorted;
-}(Array));
+}
 var EStatus;
 (function (EStatus) {
     EStatus["Pending"] = "Pending";
     EStatus["InProgress"] = "In progress";
     EStatus["Ended"] = "Ended";
 })(EStatus || (EStatus = {}));
-var Group = /** @class */ (function () {
-    function Group(_area, _directionName, _levelName, _status) {
-        if (_status === void 0) { _status = EStatus.Pending; }
+class Group {
+    _area;
+    _directionName;
+    _levelName;
+    _status;
+    _students = new ArrayWithToSorted;
+    get status() {
+        return this._status;
+    }
+    set status(status) {
+        this._status = status;
+    }
+    get student() {
+        return this._students;
+    }
+    get directionName() {
+        return this._directionName;
+    }
+    get area() {
+        return this._area;
+    }
+    get levelName() {
+        return this._levelName;
+    }
+    constructor(_area, _directionName, _levelName, _status = EStatus.Pending) {
         this._area = _area;
         this._directionName = _directionName;
         this._levelName = _levelName;
         this._status = _status;
-        this._students = new ArrayWithToSorted;
     }
-    Object.defineProperty(Group.prototype, "status", {
-        get: function () {
-            return this._status;
-        },
-        set: function (status) {
-            this._status = status;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Group.prototype, "student", {
-        get: function () {
-            return this._students;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Group.prototype, "directionName", {
-        get: function () {
-            return this._directionName;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Group.prototype, "area", {
-        get: function () {
-            return this._area;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Group.prototype, "levelName", {
-        get: function () {
-            return this._levelName;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Group.prototype.addStudent = function (student) {
+    addStudent(student) {
         addToArray(student, this._students);
-    };
-    Group.prototype.removeStudent = function (student) {
+    }
+    removeStudent(student) {
         return removeInArray(student, this._students);
-    };
-    Group.prototype.showPerformance = function () {
-        return this._students.toSorted(function (a, b) { return b.getPerformanceRating() - a.getPerformanceRating(); });
-    };
-    return Group;
-}());
-var Student = /** @class */ (function () {
-    function Student(_firstName, _lastName, _birthYear) {
+    }
+    showPerformance() {
+        return this._students.toSorted((a, b) => b.getPerformanceRating() - a.getPerformanceRating());
+    }
+}
+class Student {
+    _firstName;
+    _lastName;
+    _birthYear;
+    _grades = [];
+    _visits = [];
+    get age() {
+        return new Date(Date.now()).getFullYear() - this._birthYear.getFullYear();
+    }
+    get fullName() {
+        return `${this._lastName} ${this._firstName}`;
+    }
+    set fullName(fullName) {
+        const RE = /^([a-zA-Z']+)\s{1}([a-zA-Z']+)$/i;
+        if (RE.test(fullName))
+            [this._lastName, this._firstName] = fullName.split(' ');
+    }
+    set grade(grade) {
+        this._grades.push(grade);
+    }
+    set visit(visit) {
+        this._visits.push(visit);
+    }
+    constructor(_firstName, _lastName, _birthYear) {
         this._firstName = _firstName;
         this._lastName = _lastName;
         this._birthYear = _birthYear;
-        this._grades = [];
-        this._visits = [];
     }
-    Object.defineProperty(Student.prototype, "age", {
-        get: function () {
-            return new Date(Date.now()).getFullYear() - this._birthYear.getFullYear();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Student.prototype, "fullName", {
-        get: function () {
-            return "".concat(this._lastName, " ").concat(this._firstName);
-        },
-        set: function (fullName) {
-            var _a;
-            var RE = /^([a-zA-Z']+)\s{1}([a-zA-Z']+)$/i;
-            if (RE.test(fullName))
-                _a = fullName.split(' '), this._lastName = _a[0], this._firstName = _a[1];
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Student.prototype, "grade", {
-        set: function (grade) {
-            this._grades.push(grade);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Student.prototype, "visit", {
-        set: function (visit) {
-            this._visits.push(visit);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Student.prototype.getPerformanceRating = function () {
-        var gradeValues = this._grades.flatMap(function (grade) { return Object.values(grade); });
+    getPerformanceRating() {
+        const gradeValues = this._grades.flatMap(grade => Object.values(grade));
         if (!gradeValues.length) {
             return 0;
         }
         else {
-            var averageGrade = gradeValues.reduce(function (sum, grade) { return sum + grade; }, 0) / gradeValues.length;
-            var attendanceValues = this._visits.flatMap(function (present) { return Object.values(present); });
-            var attendancePercentage = (attendanceValues.filter(function (present) { return present; })
+            const averageGrade = gradeValues.reduce((sum, grade) => sum + grade, 0) / gradeValues.length;
+            const attendanceValues = this._visits.flatMap(present => Object.values(present));
+            const attendancePercentage = (attendanceValues.filter(present => present)
                 .length / this._visits.length) * 100;
             return (averageGrade + attendancePercentage) / 2;
         }
-    };
-    return Student;
-}());
+    }
+}
